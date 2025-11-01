@@ -1,0 +1,22 @@
+name: discord-libre-bot
+
+volumes:
+  db_data:
+
+services:
+  postgres:
+    image: postgres:17
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    ports:
+      - '5432:5432'
+
+  bot:
+    build: .
+    depends_on:
+      - postgres
+    env_file:
+      - apps/bot/.env

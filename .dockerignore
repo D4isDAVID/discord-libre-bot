@@ -1,0 +1,17 @@
+.git
+.github
+**/.turbo
+**/.idea
+**/.vscode
+**/dist
+**/node_modules
+.dockerignore
+.editorconfig
+**/.env*
+.gitattributes
+.gitignore
+.nvmrc
+Dockerfile
+LICENSE
+README.md
+biome.json

@@ -1,0 +1,3 @@
+# Discord Libre Bot
+
+WIP

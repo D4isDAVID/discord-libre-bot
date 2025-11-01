@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@internal/data",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "scripts": {
+    "clean": "rimraf .turbo && rimraf node_modules",
+    "test": "tsx --test",
+    "build": "tsc",
+    "db:generate": "drizzle-kit generate"
+  },
+  "dependencies": {
+    "drizzle-orm": "catalog:",
+    "pg": "catalog:"
+  },
+  "devDependencies": {
+    "@internal/configs": "workspace:",
+    "@internal/logger": "workspace:",
+    "@types/pg": "catalog:",
+    "drizzle-kit": "catalog:"
+  }
+}

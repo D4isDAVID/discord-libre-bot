@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@internal/bot",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "scripts": {
+    "clean": "rimraf .turbo && rimraf node_modules",
+    "test": "tsx --test",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@discordjs/collection": "catalog:",
+    "@discordjs/core": "catalog:",
+    "@discordjs/rest": "catalog:",
+    "@discordjs/util": "catalog:",
+    "@discordjs/ws": "catalog:"
+  },
+  "devDependencies": {
+    "@internal/configs": "workspace:",
+    "@internal/data": "workspace:",
+    "@internal/logger": "workspace:"
+  }
+}

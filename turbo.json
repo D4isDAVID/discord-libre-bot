@@ -1,0 +1,30 @@
+{
+  "$schema": "./node_modules/turbo/schema.json",
+  "tasks": {
+    "clean": {
+      "cache": false
+    },
+    "db:generate": {
+      "cache": false
+    },
+    "test": {
+      "dependsOn": ["^test"]
+    },
+    "build": {
+      "dependsOn": ["^build"]
+    },
+    "start": {
+      "cache": false,
+      "persistent": true
+    },
+    "build:prod": {
+      "dependsOn": ["build", "^build:prod"],
+      "outputs": ["dist/**"]
+    },
+    "start:prod": {
+      "dependsOn": ["build:prod"],
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

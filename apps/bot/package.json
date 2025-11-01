@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "bot",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf .turbo && rimraf dist && rimraf node_modules",
+    "test": "tsx --test",
+    "build": "tsc",
+    "start": "tsx --env-file=.env src/index.ts",
+    "build:prod": "rimraf dist && rspack build",
+    "start:prod": "node ."
+  },
+  "dependencies": {
+    "@internal/bot": "workspace:",
+    "@internal/data": "workspace:",
+    "@internal/features": "workspace:",
+    "@internal/logger": "workspace:",
+    "bufferutil": "catalog:",
+    "zlib-sync": "catalog:"
+  },
+  "devDependencies": {
+    "@internal/configs": "workspace:",
+    "node-loader": "catalog:"
+  }
+}

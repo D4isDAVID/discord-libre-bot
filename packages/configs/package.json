@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@internal/configs",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tsconfig.json": "./tsconfig.json"
+  },
+  "scripts": {
+    "clean": "rimraf node_modules"
+  },
+  "devDependencies": {
+    "@rspack/cli": "catalog:",
+    "@rspack/core": "catalog:"
+  }
+}
