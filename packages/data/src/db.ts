@@ -1,5 +1,6 @@
 import { stat } from 'node:fs/promises';
 import { join } from 'node:path';
+import { cwd } from 'node:process';
 import type { Logger } from '@internal/logger';
 import { drizzle, type NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { migrate } from 'drizzle-orm/node-postgres/migrator';
@@ -35,7 +36,7 @@ export function mockDb(): Database {
 }
 
 async function getMigrationsDir() {
-    const path = join(import.meta.dirname, 'drizzle');
+    const path = join(cwd(), 'drizzle');
 
     return await stat(path)
         .then(() => path)

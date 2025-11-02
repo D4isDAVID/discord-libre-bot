@@ -1,19 +1,25 @@
-import { resolve } from 'node:path';
+import { join, resolve } from 'node:path';
 import { cwd } from 'node:process';
 import { defineConfig } from '@rspack/cli';
-import type { SwcLoaderOptions } from '@rspack/core';
+import { CopyRspackPlugin, type SwcLoaderOptions } from '@rspack/core';
 
 const tsFilesRegex = /\.ts$/;
 const nodeFilesRegex = /\.node$/;
 
 export function rspackConfig() {
     const projectDir = cwd();
+    const rootDir = join(projectDir, '../..');
+    const drizzleDir = join(rootDir, './packages/data/drizzle');
 
     return defineConfig({
         entry: resolve(projectDir, './src/index.ts'),
         output: {
             filename: 'index.js',
             path: resolve(projectDir, 'dist'),
+            module: true,
+        },
+        experiments: {
+            outputModule: true,
         },
         resolve: {
             tsConfig: {
@@ -40,6 +46,16 @@ export function rspackConfig() {
                 },
             ],
         },
+        plugins: [
+            new CopyRspackPlugin({
+                patterns: [
+                    {
+                        from: drizzleDir,
+                        to: 'drizzle',
+                    },
+                ],
+            }),
+        ],
         target: ['node', 'es2025'],
     });
 }
