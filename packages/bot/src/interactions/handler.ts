@@ -140,6 +140,11 @@ export class BotInteractionHandler {
         for (const interaction of interactions) {
             const id = getId(interaction);
 
+            if (collection.has(id)) {
+                this.#logger.warn('found duplicate interaction id', { id });
+                continue;
+            }
+
             this.#logger.trace('adding interaction handler', { id });
 
             const logger = this.#logger.child(id);

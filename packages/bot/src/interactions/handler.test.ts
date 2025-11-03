@@ -14,7 +14,7 @@ import {
     type ToEventProps,
 } from '@discordjs/core';
 import { mockDb } from '@internal/data';
-import { MockLogger } from '@internal/logger';
+import { LogLevel, MockLogger } from '@internal/logger';
 import { BotCache } from '../cache.ts';
 import { type BotClient, createBotClient } from '../client.ts';
 import type { InteractionData } from './data/index.ts';
@@ -23,13 +23,15 @@ import { BotInteractionHandler } from './handler.ts';
 import type { BotInteraction } from './interaction.ts';
 
 suite('BotInteractionHandler', () => {
-    const logger = new MockLogger();
+    const logFn = mock.fn();
+    const logger = new MockLogger(logFn);
     const db = mockDb();
     let client: BotClient;
     let cache: BotCache;
     let handler: BotInteractionHandler;
 
     beforeEach(() => {
+        logFn.mock.resetCalls();
         client = createBotClient();
         cache = new BotCache({ client });
         handler = new BotInteractionHandler({ logger, client, cache, db });
@@ -283,6 +285,39 @@ suite('BotInteractionHandler', () => {
             const state = func.mock.calls[0]?.arguments[0].state;
             assert.strictEqual(func.mock.callCount(), 1);
             assert(typeof state === 'undefined');
+        });
+
+        test('Warns about duplicate interactions', () => {
+            handler.register({
+                messageComponents: [
+                    {
+                        data: {
+                            type: ComponentType.Button,
+                            custom_id: 'test_blah',
+                        } as InteractionData<APIMessageComponentButtonInteraction>,
+                        handler: func,
+                    },
+                    {
+                        data: {
+                            type: ComponentType.Button,
+                            custom_id: 'test_blah',
+                        } as InteractionData<APIMessageComponentButtonInteraction>,
+                        handler: func,
+                    },
+                    createStatefulInteraction({
+                        data: {
+                            type: ComponentType.Button,
+                            custom_id: 'test_blah',
+                        } as InteractionData<APIMessageComponentButtonInteraction>,
+                        handler: func,
+                    }),
+                ],
+            });
+
+            const warnCalls = logFn.mock.calls.filter(
+                (c) => c.arguments[0] === LogLevel.Warn,
+            );
+            assert.strictEqual(warnCalls.length, 2);
         });
     });
 });
