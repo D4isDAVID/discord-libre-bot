@@ -7,7 +7,7 @@ import type { Awaitable } from '@discordjs/util';
 import type { BotEventContainer } from '../../events/event.ts';
 import type { BotInteraction } from '../interaction.ts';
 
-type ApiStatefulInteraction =
+export type ApiStatefulInteraction =
     | APIMessageComponentInteraction
     | APIModalSubmitInteraction;
 

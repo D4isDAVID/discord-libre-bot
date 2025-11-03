@@ -18,6 +18,7 @@ import { MockLogger } from '@internal/logger';
 import { BotCache } from '../cache.ts';
 import { type BotClient, createBotClient } from '../client.ts';
 import type { InteractionData } from './data/index.ts';
+import { createStatefulInteraction } from './extensions/stateful.ts';
 import { BotInteractionHandler } from './handler.ts';
 import type { BotInteraction } from './interaction.ts';
 
@@ -155,6 +156,133 @@ suite('BotInteractionHandler', () => {
             } as ToEventProps<APIModalSubmitInteraction>);
 
             assert.strictEqual(func.mock.callCount(), 1);
+        });
+
+        test('Handles stateful message components', () => {
+            handler.register({
+                messageComponents: [
+                    createStatefulInteraction({
+                        data: {
+                            type: ComponentType.Button,
+                            custom_id: 'test',
+                        } as InteractionData<APIMessageComponentButtonInteraction>,
+                        handler: func,
+                    }),
+                ],
+            });
+
+            client.emit(GatewayDispatchEvents.InteractionCreate, {
+                data: {
+                    type: InteractionType.MessageComponent,
+                    data: {
+                        component_type: ComponentType.Button,
+                        custom_id: 'test123',
+                    },
+                },
+            } as ToEventProps<APIMessageComponentInteraction>);
+
+            assert.strictEqual(func.mock.callCount(), 1);
+            assert.partialDeepStrictEqual(func.mock.calls[0]?.arguments[0], {
+                state: '123',
+            });
+        });
+
+        test('Handles stateful modal submissions', () => {
+            handler.register({
+                modals: [
+                    createStatefulInteraction({
+                        data: {
+                            custom_id: 'test',
+                        } as InteractionData<APIModalSubmitInteraction>,
+                        handler: func,
+                    }),
+                ],
+            });
+
+            client.emit(GatewayDispatchEvents.InteractionCreate, {
+                data: {
+                    type: InteractionType.ModalSubmit,
+                    data: {
+                        custom_id: 'test123',
+                    },
+                },
+            } as ToEventProps<APIModalSubmitInteraction>);
+
+            assert.strictEqual(func.mock.callCount(), 1);
+            assert.partialDeepStrictEqual(func.mock.calls[0]?.arguments[0], {
+                state: '123',
+            });
+        });
+
+        test('Prioritizes longer statefuls', () => {
+            handler.register({
+                messageComponents: [
+                    createStatefulInteraction({
+                        data: {
+                            type: ComponentType.Button,
+                            custom_id: 'test_blah',
+                        } as InteractionData<APIMessageComponentButtonInteraction>,
+                        handler: func,
+                    }),
+                    createStatefulInteraction({
+                        data: {
+                            type: ComponentType.Button,
+                            custom_id: 'test',
+                        } as InteractionData<APIMessageComponentButtonInteraction>,
+                        handler: func,
+                    }),
+                ],
+            });
+
+            client.emit(GatewayDispatchEvents.InteractionCreate, {
+                data: {
+                    type: InteractionType.MessageComponent,
+                    data: {
+                        component_type: ComponentType.Button,
+                        custom_id: 'test_blah123',
+                    },
+                },
+            } as ToEventProps<APIMessageComponentInteraction>);
+
+            assert.strictEqual(func.mock.callCount(), 1);
+            assert.partialDeepStrictEqual(func.mock.calls[0]?.arguments[0], {
+                state: '123',
+            });
+        });
+
+        test('Prioritizes static interactions over statefuls', () => {
+            handler.register({
+                messageComponents: [
+                    {
+                        data: {
+                            type: ComponentType.Button,
+                            custom_id: 'test_blah',
+                        } as InteractionData<APIMessageComponentButtonInteraction>,
+                        handler: func,
+                    },
+                    createStatefulInteraction({
+                        data: {
+                            type: ComponentType.Button,
+                            custom_id: 'test',
+                        } as InteractionData<APIMessageComponentButtonInteraction>,
+                        handler: func,
+                    }),
+                ],
+            });
+
+            client.emit(GatewayDispatchEvents.InteractionCreate, {
+                data: {
+                    type: InteractionType.MessageComponent,
+                    data: {
+                        component_type: ComponentType.Button,
+                        custom_id: 'test_blah',
+                    },
+                },
+            } as ToEventProps<APIMessageComponentInteraction>);
+
+            const state = func.mock.calls[0]?.arguments[0].state;
+            assert.strictEqual(func.mock.callCount(), 1);
+            assert(typeof state === 'undefined');
         });
     });
 });

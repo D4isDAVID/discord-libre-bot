@@ -19,7 +19,11 @@ import type { Database } from '@internal/data';
 import type { Logger } from '@internal/logger';
 import type { BotCache } from '../cache.ts';
 import type { BotClient } from '../client.ts';
-import type { GenericBotInteraction } from './interaction.ts';
+import {
+    type ApiStatefulInteraction,
+    isStatefulInteraction,
+} from './extensions/stateful.ts';
+import type { BotInteraction, GenericBotInteraction } from './interaction.ts';
 import { haveCommandsChanged } from './predicates.ts';
 
 export interface BotInteractions {
@@ -54,6 +58,9 @@ export class BotInteractionHandler {
         GenericBotInteraction<APIModalSubmitInteraction>
     >();
 
+    #statefulMessageComponents: string[] = [];
+    #statefulModals: string[] = [];
+
     constructor({ logger, client, cache, db }: BotInteractionHandlerOptions) {
         this.#logger = logger;
         this.#client = client;
@@ -73,6 +80,12 @@ export class BotInteractionHandler {
             (c) => c.data.custom_id,
         );
         this.#register(modals, this.#modals, (m) => m.data.custom_id);
+
+        this.#registerStateful(
+            messageComponents,
+            this.#statefulMessageComponents,
+        );
+        this.#registerStateful(modals, this.#statefulModals);
     }
 
     registerInteractionCreateListener() {
@@ -154,6 +167,18 @@ export class BotInteractionHandler {
         }
     }
 
+    #registerStateful<
+        I extends ApiStatefulInteraction,
+        T extends GenericBotInteraction<I>,
+    >(interactions: T[], statefuls: string[]) {
+        for (const interaction of interactions.filter((i) =>
+            isStatefulInteraction(i as BotInteraction<I>),
+        )) {
+            statefuls.push(interaction.data.custom_id);
+        }
+        statefuls.sort((a, b) => b.length - a.length);
+    }
+
     async #interactionCreate(props: ToEventProps<APIInteraction>) {
         const { data: interaction } = props;
 
@@ -186,6 +211,7 @@ export class BotInteractionHandler {
                     this.#messageComponents,
                     { ...props, data: interaction },
                     (i) => i.handler,
+                    this.#statefulMessageComponents,
                 );
                 break;
             }
@@ -213,6 +239,7 @@ export class BotInteractionHandler {
                     this.#modals,
                     { ...props, data: interaction },
                     (i) => i.handler,
+                    this.#statefulModals,
                 );
                 break;
             }
@@ -235,8 +262,16 @@ export class BotInteractionHandler {
         collection: Collection<string, T>,
         props: P,
         getHandler: (interaction: T) => ((props: P) => Awaitable<void>) | null,
+        statefuls: string[] = [],
     ) {
-        const interaction = collection.get(id);
+        let interaction = collection.get(id);
+
+        if (typeof interaction === 'undefined') {
+            const statefulId = statefuls.find((s) => id.startsWith(s));
+            if (typeof statefulId !== 'undefined') {
+                interaction = collection.get(statefulId);
+            }
+        }
 
         if (typeof interaction === 'undefined') {
             this.#logger.warn('unhandled interaction', { interaction: id });
