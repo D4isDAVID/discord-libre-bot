@@ -6,7 +6,7 @@ import {
 import type { MapUnion } from '../../utils.ts';
 import type { IntentBasedEventData } from './types.ts';
 
-export interface IntentBasedPredicateData {
+interface IntentBasedPredicateData {
     userId: Snowflake;
 }
 
