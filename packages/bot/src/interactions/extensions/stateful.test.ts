@@ -8,6 +8,7 @@ import {
 } from '@discordjs/core';
 import type { BotEventContainer } from '../../events/event.ts';
 import type { BotInteraction } from '../interaction.ts';
+import { intSerializer, stringSerializer } from '../utils/statefuls.ts';
 import {
     createStatefulInteraction,
     isStatefulInteraction,
@@ -41,13 +42,12 @@ suite('createStatefulInteraction()', () => {
     };
 
     test('Registers state', () => {
-        const interaction =
-            createStatefulInteraction<APIMessageComponentButtonInteraction>({
-                data,
-                handler() {
-                    return;
-                },
-            });
+        const interaction = createStatefulInteraction(stringSerializer, {
+            data,
+            handler() {
+                return;
+            },
+        });
 
         const stateful = interaction.stateful('123');
 
@@ -56,11 +56,10 @@ suite('createStatefulInteraction()', () => {
 
     test('Handles state', () => {
         const func = mock.fn();
-        const interaction =
-            createStatefulInteraction<APIMessageComponentButtonInteraction>({
-                data,
-                handler: func,
-            });
+        const interaction = createStatefulInteraction(stringSerializer, {
+            data,
+            handler: func,
+        });
 
         interaction.handler.bind({} as BotEventContainer)({
             data: {
@@ -74,19 +73,10 @@ suite('createStatefulInteraction()', () => {
     });
 
     test('Serializes state', () => {
-        const interaction = createStatefulInteraction<
-            APIMessageComponentButtonInteraction,
-            number
-        >({
+        const interaction = createStatefulInteraction(intSerializer, {
             data,
             handler() {
                 return;
-            },
-            serialize(state) {
-                return `${state}`;
-            },
-            deserialize(state) {
-                return Number.parseInt(state);
             },
         });
 
@@ -97,18 +87,9 @@ suite('createStatefulInteraction()', () => {
 
     test('Handles state', () => {
         const func = mock.fn();
-        const interaction = createStatefulInteraction<
-            APIMessageComponentButtonInteraction,
-            number
-        >({
+        const interaction = createStatefulInteraction(intSerializer, {
             data,
             handler: func,
-            serialize(state) {
-                return `${state}`;
-            },
-            deserialize(state) {
-                return Number.parseInt(state);
-            },
         });
 
         interaction.handler.bind({} as BotEventContainer)({

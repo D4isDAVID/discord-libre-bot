@@ -24,43 +24,35 @@ export function isStatefulInteraction<T extends ApiStatefulInteraction>(
     );
 }
 
-type CreateStatefulInteractionOptions<T extends ApiStatefulInteraction, S> = {
+export interface StatefulInteractionSerializer<S> {
+    serialize(state: S): string;
+    deserialize(state: string): S;
+}
+
+export interface StatefulInteractionProps<T extends ApiStatefulInteraction, S> {
     data: BotInteraction<T>['data'];
     handler(
         this: BotEventContainer,
         props: ToEventProps<T> & { state: S },
     ): Awaitable<void>;
-} & (S extends string
-    ? {
-          serialize?: never;
-          deserialize?: never;
-      }
-    : {
-          serialize(state: S): string;
-          deserialize(state: string): S;
-      });
+}
 
-export function createStatefulInteraction<
-    T extends ApiStatefulInteraction,
-    S = string,
->({
-    data,
-    handler,
-    serialize,
-    deserialize,
-}: CreateStatefulInteractionOptions<T, S>): BotStatefulInteraction<T, S> {
+export function createStatefulInteraction<T extends ApiStatefulInteraction, S>(
+    { serialize, deserialize }: StatefulInteractionSerializer<S>,
+    { data, handler }: StatefulInteractionProps<T, S>,
+): BotStatefulInteraction<T, S> {
     return {
         data,
         async handler(props) {
             const state = props.data.data.custom_id.replace(data.custom_id, '');
             await handler.bind(this)({
                 ...props,
-                state: deserialize?.(state) ?? (state as S),
+                state: deserialize(state) ?? (state as S),
             });
         },
         stateful(state) {
             const newData = structuredClone(data);
-            newData.custom_id += serialize?.(state) ?? state;
+            newData.custom_id += serialize(state) ?? state;
             return newData;
         },
     } satisfies BotStatefulInteraction<T, S>;

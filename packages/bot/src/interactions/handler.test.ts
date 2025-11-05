@@ -21,6 +21,7 @@ import type { InteractionData } from './data/index.ts';
 import { createStatefulInteraction } from './extensions/stateful.ts';
 import { BotInteractionHandler } from './handler.ts';
 import type { BotInteraction } from './interaction.ts';
+import { stringSerializer } from './utils/statefuls.ts';
 
 suite('BotInteractionHandler', () => {
     const logFn = mock.fn();
@@ -163,7 +164,7 @@ suite('BotInteractionHandler', () => {
         test('Handles stateful message components', () => {
             handler.register({
                 messageComponents: [
-                    createStatefulInteraction({
+                    createStatefulInteraction(stringSerializer, {
                         data: {
                             type: ComponentType.Button,
                             custom_id: 'test',
@@ -192,7 +193,7 @@ suite('BotInteractionHandler', () => {
         test('Handles stateful modal submissions', () => {
             handler.register({
                 modals: [
-                    createStatefulInteraction({
+                    createStatefulInteraction(stringSerializer, {
                         data: {
                             custom_id: 'test',
                         } as InteractionData<APIModalSubmitInteraction>,
@@ -219,14 +220,14 @@ suite('BotInteractionHandler', () => {
         test('Prioritizes longer statefuls', () => {
             handler.register({
                 messageComponents: [
-                    createStatefulInteraction({
+                    createStatefulInteraction(stringSerializer, {
                         data: {
                             type: ComponentType.Button,
                             custom_id: 'test_blah',
                         } as InteractionData<APIMessageComponentButtonInteraction>,
                         handler: func,
                     }),
-                    createStatefulInteraction({
+                    createStatefulInteraction(stringSerializer, {
                         data: {
                             type: ComponentType.Button,
                             custom_id: 'test',
@@ -262,7 +263,7 @@ suite('BotInteractionHandler', () => {
                         } as InteractionData<APIMessageComponentButtonInteraction>,
                         handler: func,
                     },
-                    createStatefulInteraction({
+                    createStatefulInteraction(stringSerializer, {
                         data: {
                             type: ComponentType.Button,
                             custom_id: 'test',
@@ -304,7 +305,7 @@ suite('BotInteractionHandler', () => {
                         } as InteractionData<APIMessageComponentButtonInteraction>,
                         handler: func,
                     },
-                    createStatefulInteraction({
+                    createStatefulInteraction(stringSerializer, {
                         data: {
                             type: ComponentType.Button,
                             custom_id: 'test_blah',
