@@ -18,7 +18,7 @@ import {
     type MappedEvents,
     type ToEventProps,
 } from '@discordjs/core';
-import type { Require } from '../../utils.ts';
+import type { Require } from '@internal/util';
 
 export enum CombinedIntents {
     MessageContent = GatewayIntentBits.GuildMessages |

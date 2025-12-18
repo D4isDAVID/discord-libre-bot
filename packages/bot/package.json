@@ -14,7 +14,8 @@
     "@discordjs/core": "catalog:",
     "@discordjs/rest": "catalog:",
     "@discordjs/util": "catalog:",
-    "@discordjs/ws": "catalog:"
+    "@discordjs/ws": "catalog:",
+    "@internal/util": "workspace:"
   },
   "devDependencies": {
     "@internal/configs": "workspace:",

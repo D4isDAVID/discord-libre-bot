@@ -11,8 +11,8 @@ import {
 } from '@discordjs/core';
 import type { Awaitable } from '@discordjs/util';
 import type { Logger } from '@internal/logger';
+import type { Require } from '@internal/util';
 import type { BotEventContainer } from '../../events/event.ts';
-import type { Require } from '../../utils.ts';
 import type {
     ApiAutocompleteInteraction,
     BotInteraction,

@@ -4,9 +4,9 @@ import type { Awaitable } from '@discordjs/util';
 import type { WebSocketShardEventsMap } from '@discordjs/ws';
 import type { Database } from '@internal/data';
 import type { Logger } from '@internal/logger';
+import type { EventMap, MapUnion } from '@internal/util';
 import type { BotCache } from '../cache.ts';
 import type { BotClient } from '../client.ts';
-import type { EventMap, MapUnion } from '../utils.ts';
 import type {
     IntentBasedEventData,
     IntentBasedMappedEvents,

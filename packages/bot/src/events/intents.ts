@@ -49,15 +49,15 @@ export const gatewayDispatchEventIntents: Record<keyof MappedEvents, number> = {
         GatewayIntentBits.GuildScheduledEvents,
     [GatewayDispatchEvents.GuildScheduledEventUserRemove]:
         GatewayIntentBits.GuildScheduledEvents,
-    // [GatewayDispatchEvents.GuildSoundboardSoundCreate]:
-    //     GatewayIntentBits.GuildExpressions,
-    // [GatewayDispatchEvents.GuildSoundboardSoundDelete]:
-    //     GatewayIntentBits.GuildExpressions,
-    // [GatewayDispatchEvents.GuildSoundboardSoundsUpdate]:
-    //     GatewayIntentBits.GuildExpressions,
-    // [GatewayDispatchEvents.GuildSoundboardSoundUpdate]:
-    //     GatewayIntentBits.GuildExpressions,
-    // [GatewayDispatchEvents.SoundboardSounds]: 0,
+    [GatewayDispatchEvents.GuildSoundboardSoundCreate]:
+        GatewayIntentBits.GuildExpressions,
+    [GatewayDispatchEvents.GuildSoundboardSoundDelete]:
+        GatewayIntentBits.GuildExpressions,
+    [GatewayDispatchEvents.GuildSoundboardSoundsUpdate]:
+        GatewayIntentBits.GuildExpressions,
+    [GatewayDispatchEvents.GuildSoundboardSoundUpdate]:
+        GatewayIntentBits.GuildExpressions,
+    [GatewayDispatchEvents.SoundboardSounds]: 0,
     [GatewayDispatchEvents.GuildStickersUpdate]:
         GatewayIntentBits.GuildExpressions,
     [GatewayDispatchEvents.GuildUpdate]: GatewayIntentBits.Guilds,
@@ -96,14 +96,15 @@ export const gatewayDispatchEventIntents: Record<keyof MappedEvents, number> = {
     [GatewayDispatchEvents.MessageUpdate]:
         GatewayIntentBits.GuildMessages | GatewayIntentBits.DirectMessages,
     [GatewayDispatchEvents.PresenceUpdate]: GatewayIntentBits.GuildPresences,
+    [GatewayDispatchEvents.RateLimited]: 0,
     [GatewayDispatchEvents.Ready]: 0,
     [GatewayDispatchEvents.Resumed]: 0,
     [GatewayDispatchEvents.StageInstanceCreate]: GatewayIntentBits.Guilds,
     [GatewayDispatchEvents.StageInstanceDelete]: GatewayIntentBits.Guilds,
     [GatewayDispatchEvents.StageInstanceUpdate]: GatewayIntentBits.Guilds,
-    // [GatewayDispatchEvents.SubscriptionCreate]: 0,
-    // [GatewayDispatchEvents.SubscriptionDelete]: 0,
-    // [GatewayDispatchEvents.SubscriptionUpdate]: 0,
+    [GatewayDispatchEvents.SubscriptionCreate]: 0,
+    [GatewayDispatchEvents.SubscriptionDelete]: 0,
+    [GatewayDispatchEvents.SubscriptionUpdate]: 0,
     [GatewayDispatchEvents.ThreadCreate]: GatewayIntentBits.Guilds,
     [GatewayDispatchEvents.ThreadDelete]: GatewayIntentBits.Guilds,
     [GatewayDispatchEvents.ThreadListSync]: GatewayIntentBits.Guilds,

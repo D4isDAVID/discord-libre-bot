@@ -3,7 +3,7 @@ import {
     GatewayIntentBits,
     type Snowflake,
 } from '@discordjs/core';
-import type { MapUnion } from '../../utils.ts';
+import type { MapUnion } from '@internal/util';
 import type { IntentBasedEventData } from './types.ts';
 
 interface IntentBasedPredicateData {

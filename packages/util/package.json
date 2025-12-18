@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@internal/util",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "scripts": {
+    "clean": "rimraf .turbo && rimraf node_modules",
+    "test": "tsx --test",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@internal/configs": "workspace:"
+  }
+}

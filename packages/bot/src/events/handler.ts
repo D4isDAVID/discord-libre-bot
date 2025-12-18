@@ -1,9 +1,9 @@
 import { inspect } from 'node:util';
 import type { Database } from '@internal/data';
 import type { Logger } from '@internal/logger';
+import type { GenericEventEmitter } from '@internal/util';
 import type { BotCache } from '../cache.ts';
 import type { BotClient } from '../client.ts';
-import type { GenericEventEmitter } from '../utils.ts';
 import type {
     GenericBotEvent,
     GenericBotGatewayDispatchEvent,
