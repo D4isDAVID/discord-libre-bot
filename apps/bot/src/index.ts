@@ -1,10 +1,13 @@
 import { Bot } from '@internal/bot';
-import { prepareDb } from '@internal/data';
+import { DrizzleRepositories } from '@internal/data';
 import { botFeatures } from '@internal/features';
 import { getDatabaseUrl, getEnvLogger, getEnvToken } from './env.ts';
 
 const logger = getEnvLogger();
-const db = await prepareDb(logger.child('db'), getDatabaseUrl());
+const db = new DrizzleRepositories({
+    connection: getDatabaseUrl(),
+    logger: logger.child('db'),
+});
 const bot = new Bot({
     logger,
     client: { token: getEnvToken() },
@@ -15,4 +18,5 @@ for (const feature of botFeatures) {
     bot.features.register(feature);
 }
 
+await db.applyMigrations();
 await bot.start();

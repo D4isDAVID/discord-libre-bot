@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { beforeEach, mock, suite, test } from 'node:test';
-import { mockDb } from '@internal/data';
+import { MockRepositories } from '@internal/data';
 import { MockLogger } from '@internal/logger';
 import { BotCache } from './cache.ts';
 import { createBotClient } from './client.ts';
@@ -10,15 +10,15 @@ import { BotInteractionHandler } from './interactions/handler.ts';
 
 suite('BotFeatureHandler', () => {
     const logger = new MockLogger();
-    const db = mockDb();
+    const db = new MockRepositories();
     const client = createBotClient();
     const cache = new BotCache({ client });
-    const events = new BotEventHandler({ logger, client, cache, db });
+    const events = new BotEventHandler({ logger, db, client, cache });
     const interactions = new BotInteractionHandler({
         logger,
+        db,
         client,
         cache,
-        db,
     });
     let handler: BotFeatureHandler;
 

@@ -1,4 +1,4 @@
-import type { Database } from '@internal/data';
+import type { Repositories } from '@internal/data';
 import type { Logger } from '@internal/logger';
 import { BotCache } from './cache.ts';
 import {
@@ -12,8 +12,8 @@ import { BotInteractionHandler } from './interactions/handler.ts';
 
 export interface BotOptions {
     logger: Logger;
+    db: Repositories;
     client: CreateBotClientOptions;
-    db: Database;
 }
 
 export class Bot {
@@ -23,23 +23,23 @@ export class Bot {
     cache: BotCache;
     features: BotFeatureHandler;
 
-    constructor({ logger, client, db }: BotOptions) {
+    constructor({ logger, db, client }: BotOptions) {
         this.#logger = logger;
         this.client = createBotClient(client);
 
         this.cache = new BotCache({ client: this.client });
         this.features = new BotFeatureHandler({
             events: new BotEventHandler({
-                client: this.client,
                 logger: this.#logger.child('events'),
-                cache: this.cache,
                 db,
+                client: this.client,
+                cache: this.cache,
             }),
             interactions: new BotInteractionHandler({
-                client: this.client,
                 logger: this.#logger.child('interactions'),
-                cache: this.cache,
                 db,
+                client: this.client,
+                cache: this.cache,
             }),
         });
     }

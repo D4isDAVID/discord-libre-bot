@@ -13,7 +13,7 @@ import {
     InteractionType,
     type ToEventProps,
 } from '@discordjs/core';
-import { mockDb } from '@internal/data';
+import { MockRepositories } from '@internal/data';
 import { LogLevel, MockLogger } from '@internal/logger';
 import { BotCache } from '../cache.ts';
 import { type BotClient, createBotClient } from '../client.ts';
@@ -26,7 +26,7 @@ import { stringSerializer } from './utils/statefuls.ts';
 suite('BotInteractionHandler', () => {
     const logFn = mock.fn();
     const logger = new MockLogger(logFn);
-    const db = mockDb();
+    const db = new MockRepositories();
     let client: BotClient;
     let cache: BotCache;
     let handler: BotInteractionHandler;
@@ -35,7 +35,7 @@ suite('BotInteractionHandler', () => {
         logFn.mock.resetCalls();
         client = createBotClient();
         cache = new BotCache({ client });
-        handler = new BotInteractionHandler({ logger, client, cache, db });
+        handler = new BotInteractionHandler({ logger, db, client, cache });
     });
 
     suite('registerInteractionCreateListener()', () => {

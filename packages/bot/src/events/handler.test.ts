@@ -3,7 +3,7 @@ import { beforeEach, suite, test } from 'node:test';
 import { GatewayDispatchEvents, GatewayIntentBits } from '@discordjs/core';
 import { RESTEvents } from '@discordjs/rest';
 import { WebSocketShardEvents } from '@discordjs/ws';
-import { mockDb } from '@internal/data';
+import { MockRepositories } from '@internal/data';
 import { MockLogger } from '@internal/logger';
 import { BotCache } from '../cache.ts';
 import { type BotClient, createBotClient } from '../client.ts';
@@ -12,7 +12,7 @@ import { CombinedIntents } from './intent-based/types.ts';
 
 suite('BotEventHandler', () => {
     const logger = new MockLogger();
-    const db = mockDb();
+    const db = new MockRepositories();
     let client: BotClient;
     let cache: BotCache;
     let handler: BotEventHandler;
@@ -20,7 +20,7 @@ suite('BotEventHandler', () => {
     beforeEach(() => {
         client = createBotClient();
         cache = new BotCache({ client });
-        handler = new BotEventHandler({ logger, client, cache, db });
+        handler = new BotEventHandler({ logger, db, client, cache });
     });
 
     suite('register()', () => {

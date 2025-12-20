@@ -15,7 +15,7 @@ import {
     type ToEventProps,
 } from '@discordjs/core';
 import type { Awaitable } from '@discordjs/util';
-import type { Database } from '@internal/data';
+import type { Repositories } from '@internal/data';
 import type { Logger } from '@internal/logger';
 import type { BotCache } from '../cache.ts';
 import type { BotClient } from '../client.ts';
@@ -34,16 +34,16 @@ export interface BotInteractions {
 
 export interface BotInteractionHandlerOptions {
     logger: Logger;
+    db: Repositories;
     client: BotClient;
     cache: BotCache;
-    db: Database;
 }
 
 export class BotInteractionHandler {
     #logger: Logger;
+    #db: Repositories;
     #client: BotClient;
     #cache: BotCache;
-    #db: Database;
 
     #commands = new Collection<
         string,
@@ -61,11 +61,11 @@ export class BotInteractionHandler {
     #statefulMessageComponents: string[] = [];
     #statefulModals: string[] = [];
 
-    constructor({ logger, client, cache, db }: BotInteractionHandlerOptions) {
+    constructor({ logger, db, client, cache }: BotInteractionHandlerOptions) {
         this.#logger = logger;
+        this.#db = db;
         this.#client = client;
         this.#cache = cache;
-        this.#db = db;
     }
 
     register({
@@ -149,10 +149,10 @@ export class BotInteractionHandler {
 
             const logger = this.#logger.child(id);
             const handler = interaction.handler.bind({
-                client: this.#client,
                 logger,
-                cache: this.#cache,
                 db: this.#db,
+                client: this.#client,
+                cache: this.#cache,
             });
 
             collection.set(id, {

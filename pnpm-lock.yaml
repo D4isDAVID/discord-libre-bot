@@ -24,6 +24,9 @@ catalogs:
     '@discordjs/ws':
       specifier: ^2.0.4
       version: 2.0.4
+    '@electric-sql/pglite':
+      specifier: ^0.3.14
+      version: 0.3.14
     '@rspack/cli':
       specifier: ^1.6.6
       version: 1.6.6
@@ -153,11 +156,14 @@ importers:
     dependencies:
       drizzle-orm:
         specifier: 'catalog:'
-        version: 0.45.0(@types/pg@8.15.6)(pg@8.16.3)
+        version: 0.45.0(@electric-sql/pglite@0.3.14)(@types/pg@8.15.6)(pg@8.16.3)
       pg:
         specifier: 'catalog:'
         version: 8.16.3
     devDependencies:
+      '@electric-sql/pglite':
+        specifier: 'catalog:'
+        version: 0.3.14
       '@internal/configs':
         specifier: 'workspace:'
         version: link:../configs
@@ -303,6 +309,9 @@ packages:
 
   '@drizzle-team/brocli@0.10.2':
     resolution: {integrity: sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w==}
+
+  '@electric-sql/pglite@0.3.14':
+    resolution: {integrity: sha512-3DB258dhqdsArOI1fIt7cb9RpUOgcDg5hXWVgVHAeqVQ/qxtFy605QKs4gx6mFq3jWsSPqDN8TgSEsqC3OfV9Q==}
 
   '@emnapi/core@1.5.0':
     resolution: {integrity: sha512-sbP8GzB1WDzacS8fgNPpHlp6C9VZe+SJP3F90W9rLemaQj2PzIuTEl1qDOYQf58YIpyjViI24y9aPWCjEzY2cg==}
@@ -2393,6 +2402,8 @@ snapshots:
 
   '@drizzle-team/brocli@0.10.2': {}
 
+  '@electric-sql/pglite@0.3.14': {}
+
   '@emnapi/core@1.5.0':
     dependencies:
       '@emnapi/wasi-threads': 1.1.0
@@ -3211,8 +3222,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.45.0(@types/pg@8.15.6)(pg@8.16.3):
+  drizzle-orm@0.45.0(@electric-sql/pglite@0.3.14)(@types/pg@8.15.6)(pg@8.16.3):
     optionalDependencies:
+      '@electric-sql/pglite': 0.3.14
       '@types/pg': 8.15.6
       pg: 8.16.3
 

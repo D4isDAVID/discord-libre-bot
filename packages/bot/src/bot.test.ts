@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import { beforeEach, mock, suite, test } from 'node:test';
-import { mockDb } from '@internal/data';
+import { MockRepositories } from '@internal/data';
 import { MockLogger } from '@internal/logger';
 import { Bot } from './bot.ts';
 
 suite('Bot', () => {
     const logger = new MockLogger();
-    const db = mockDb();
+    const db = new MockRepositories();
     let bot: Bot;
 
     beforeEach(() => {

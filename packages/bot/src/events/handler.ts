@@ -1,5 +1,5 @@
 import { inspect } from 'node:util';
-import type { Database } from '@internal/data';
+import type { Repositories } from '@internal/data';
 import type { Logger } from '@internal/logger';
 import type { GenericEventEmitter } from '@internal/util';
 import type { BotCache } from '../cache.ts';
@@ -20,24 +20,24 @@ export interface BotEvents {
 
 export interface BotEventHandlerOptions {
     logger: Logger;
+    db: Repositories;
     client: BotClient;
     cache: BotCache;
-    db: Database;
 }
 
 export class BotEventHandler {
     #logger: Logger;
+    #db: Repositories;
     #client: BotClient;
     #cache: BotCache;
-    #db: Database;
 
     #intents = 0;
 
-    constructor({ logger, client, cache, db }: BotEventHandlerOptions) {
+    constructor({ logger, db, client, cache }: BotEventHandlerOptions) {
         this.#logger = logger;
+        this.#db = db;
         this.#client = client;
         this.#cache = cache;
-        this.#db = db;
     }
 
     get intents(): number {
@@ -70,10 +70,10 @@ export class BotEventHandler {
 
             const logger = this.#logger.child(event.name);
             const handler = event.handler.bind({
-                client: this.#client,
                 logger,
-                cache: this.#cache,
                 db: this.#db,
+                client: this.#client,
+                cache: this.#cache,
             });
 
             emitter[event.once ? 'once' : 'on'](event.name, async (...args) => {

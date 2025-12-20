@@ -2,7 +2,7 @@ import type { MappedEvents } from '@discordjs/core';
 import type { RestEventsMap } from '@discordjs/rest';
 import type { Awaitable } from '@discordjs/util';
 import type { WebSocketShardEventsMap } from '@discordjs/ws';
-import type { Database } from '@internal/data';
+import type { Repositories } from '@internal/data';
 import type { Logger } from '@internal/logger';
 import type { EventMap, MapUnion } from '@internal/util';
 import type { BotCache } from '../cache.ts';
@@ -14,9 +14,9 @@ import type {
 
 export interface BotEventContainer {
     logger: Logger;
+    db: Repositories;
     client: BotClient;
     cache: BotCache;
-    db: Database;
 }
 
 interface BaseBotEvent<T extends string | number | symbol> {

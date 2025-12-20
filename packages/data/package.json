@@ -15,6 +15,7 @@
     "pg": "catalog:"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "catalog:",
     "@internal/configs": "workspace:",
     "@internal/logger": "workspace:",
     "@types/pg": "catalog:",
