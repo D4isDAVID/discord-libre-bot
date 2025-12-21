@@ -19,19 +19,17 @@ export interface BotEventContainer {
     cache: BotCache;
 }
 
-interface BaseBotEvent<T extends string | number | symbol> {
+interface BaseBotEvent<T extends PropertyKey> {
     name: T;
     once?: boolean;
 }
 
-export interface BotEvent<
-    T extends string | number | symbol,
-    M extends EventMap<T>,
-> extends BaseBotEvent<T> {
+export interface BotEvent<T extends PropertyKey, M extends EventMap<T>>
+    extends BaseBotEvent<T> {
     handler(this: BotEventContainer, ...args: M[T]): Awaitable<void>;
 }
 export type GenericBotEvent<
-    T extends string | number | symbol,
+    T extends PropertyKey,
     M extends EventMap<T>,
 > = MapUnion<{
     [K in T]: BotEvent<K, M>;

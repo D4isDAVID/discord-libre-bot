@@ -1,6 +1,7 @@
-export type EventMap<
-    T extends string | number | symbol = string | number | symbol,
-> = Record<T, unknown[]>;
+export type EventMap<T extends PropertyKey = PropertyKey> = Record<
+    T,
+    unknown[]
+>;
 
 export interface GenericEventEmitter<T extends EventMap> {
     on<K extends keyof T>(
