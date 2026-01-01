@@ -26,7 +26,7 @@ export class BaseDrizzleRepositories implements Repositories {
 
         return await stat(path)
             .then(() => path)
-            .catch(() => join(import.meta.dirname, '..', 'drizzle'));
+            .catch(() => join(import.meta.dirname, '..', '..', 'drizzle'));
     }
 
     readonly #logger: Logger;
