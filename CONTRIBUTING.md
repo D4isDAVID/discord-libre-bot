@@ -70,8 +70,8 @@ accepted due to prior discussion.
 > breaking changes.
 >
 > If you are interested in implementing larger changes, please discuss them in
-> [GitHub Discussions] or the [Discord server] to avoid spending significant
-> time on work that may not be accepted.
+> [GitHub Discussions] to avoid spending significant time on work that may not
+> be accepted.
 
 This project uses GitHub pull requests to handle code contributions.
 
