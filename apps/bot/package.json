@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@internal/configs": "workspace:",
+    "@rspack/core": "catalog:",
     "node-loader": "catalog:"
   }
 }
