@@ -1,6 +1,5 @@
 import { stat } from 'node:fs/promises';
 import { join } from 'node:path';
-import { cwd } from 'node:process';
 import type { Logger } from '@internal/logger';
 import type { DrizzleConfig } from 'drizzle-orm';
 import type { MigrationConfig } from 'drizzle-orm/migrator';
@@ -22,11 +21,11 @@ export interface BaseDrizzleRepositoriesOptions {
 
 export class BaseDrizzleRepositories implements Repositories {
     static async #getMigrationsDir() {
-        const path = join(cwd(), 'drizzle');
+        const path = join(import.meta.dirname, 'drizzle');
 
         return await stat(path)
             .then(() => path)
-            .catch(() => join(import.meta.dirname, '..', 'drizzle'));
+            .catch(() => join(import.meta.dirname, '..', '..', 'drizzle'));
     }
 
     readonly #logger: Logger;
