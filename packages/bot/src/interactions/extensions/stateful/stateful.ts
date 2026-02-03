@@ -4,8 +4,8 @@ import type {
     ToEventProps,
 } from '@discordjs/core';
 import type { Awaitable } from '@discordjs/util';
-import type { BotEventContainer } from '../../events/event.ts';
-import type { BotInteraction } from '../interaction.ts';
+import type { BotEventContainer } from '../../../events/event.ts';
+import type { BotInteraction } from '../../interaction.ts';
 
 export type ApiStatefulInteraction =
     | APIMessageComponentInteraction

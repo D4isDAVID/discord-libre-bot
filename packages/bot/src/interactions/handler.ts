@@ -22,7 +22,7 @@ import type { BotClient } from '../client.ts';
 import {
     type ApiStatefulInteraction,
     isStatefulInteraction,
-} from './extensions/stateful.ts';
+} from './extensions/index.ts';
 import type { BotInteraction, GenericBotInteraction } from './interaction.ts';
 import { haveCommandsChanged } from './predicates.ts';
 

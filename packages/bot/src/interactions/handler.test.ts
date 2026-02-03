@@ -18,10 +18,12 @@ import { LogLevel, MockLogger } from '@internal/logger';
 import { BotCache } from '../cache.ts';
 import { type BotClient, createBotClient } from '../client.ts';
 import type { InteractionData } from './data/index.ts';
-import { createStatefulInteraction } from './extensions/stateful.ts';
+import {
+    createStatefulInteraction,
+    stringSerializer,
+} from './extensions/index.ts';
 import { BotInteractionHandler } from './handler.ts';
 import type { BotInteraction } from './interaction.ts';
-import { stringSerializer } from './utils/statefuls.ts';
 
 suite('BotInteractionHandler', () => {
     const logFn = mock.fn();

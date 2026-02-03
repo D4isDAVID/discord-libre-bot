@@ -1,4 +1,4 @@
-import type { StatefulInteractionSerializer } from '../extensions/stateful.ts';
+import type { StatefulInteractionSerializer } from './stateful.ts';
 
 export const stringSerializer: StatefulInteractionSerializer<string> = {
     serialize(state) {

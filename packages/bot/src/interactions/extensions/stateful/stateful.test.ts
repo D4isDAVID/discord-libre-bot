@@ -6,9 +6,9 @@ import {
     ComponentType,
     type ToEventProps,
 } from '@discordjs/core';
-import type { BotEventContainer } from '../../events/event.ts';
-import type { BotInteraction } from '../interaction.ts';
-import { intSerializer, stringSerializer } from '../utils/statefuls.ts';
+import type { BotEventContainer } from '../../../events/event.ts';
+import type { BotInteraction } from '../../interaction.ts';
+import { intSerializer, stringSerializer } from './serializers.ts';
 import {
     createStatefulInteraction,
     isStatefulInteraction,

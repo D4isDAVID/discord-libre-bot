@@ -6,13 +6,13 @@ import {
     ComponentType,
     type ToEventProps,
 } from '@discordjs/core';
-import type { BotEventContainer } from '../../events/event.ts';
-import { createStatefulInteraction } from '../extensions/stateful.ts';
+import type { BotEventContainer } from '../../../events/event.ts';
 import {
     arraySerializer,
     intSerializer,
     stringSerializer,
-} from './statefuls.ts';
+} from './serializers.ts';
+import { createStatefulInteraction } from './stateful.ts';
 
 suite('stringSerializer', () => {
     const func = mock.fn();
