@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG NODE_VERSION=24.11.0
+ARG NODE_VERSION=25.6.0
 
 FROM node:${NODE_VERSION}-alpine AS base
 
@@ -8,7 +8,7 @@ WORKDIR /app
 
 FROM base AS build
 
-ARG PNPM_VERSION=10.20.0
+ARG PNPM_VERSION=10.28.2
 
 COPY . .
 

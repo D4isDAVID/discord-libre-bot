@@ -9,15 +9,15 @@ catalog:
   '@discordjs/rest': ^2.6.0
   '@discordjs/util': ^1.2.0
   '@discordjs/ws': ^2.0.4
-  '@electric-sql/pglite': ^0.3.14
-  '@rspack/cli': ^1.6.6
-  '@rspack/core': ^1.6.6
-  '@types/pg': ^8.15.6
-  bufferutil: ^4.0.9
+  '@electric-sql/pglite': ^0.3.15
+  '@rspack/cli': ^1.7.5
+  '@rspack/core': ^1.7.5
+  '@types/pg': ^8.16.0
+  bufferutil: ^4.1.0
   drizzle-kit: ^0.31.8
-  drizzle-orm: ^0.45.0
+  drizzle-orm: ^0.45.1
   node-loader: ^2.1.0
-  pg: ^8.16.3
+  pg: ^8.18.0
   yoctocolors: ^2.1.2
   zlib-sync: ^0.1.10
 

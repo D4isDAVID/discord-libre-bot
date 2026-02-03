@@ -5,7 +5,7 @@
   "type": "module",
   "exports": "./src/index.ts",
   "scripts": {
-    "clean": "rimraf .turbo && rimraf node_modules",
+    "clean": "rimraf .turbo node_modules",
     "test": "tsx --test",
     "build": "tsc",
     "db:generate": "drizzle-kit generate"

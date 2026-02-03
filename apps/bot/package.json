@@ -5,7 +5,7 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "clean": "rimraf .turbo && rimraf dist && rimraf node_modules",
+    "clean": "rimraf .turbo dist node_modules",
     "test": "tsx --test",
     "build": "tsc",
     "start": "tsx --env-file=.env src/index.ts",

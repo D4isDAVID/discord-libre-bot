@@ -8,7 +8,7 @@
     "./tsconfig.json": "./tsconfig.json"
   },
   "scripts": {
-    "clean": "rimraf node_modules"
+    "clean": "rimraf .turbo node_modules"
   },
   "devDependencies": {
     "@rspack/cli": "catalog:",
