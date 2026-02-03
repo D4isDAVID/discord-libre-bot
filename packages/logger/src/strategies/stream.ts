@@ -18,9 +18,9 @@ export interface StreamLoggerOptions {
 }
 
 export class StreamLogger extends Logger {
-    #context: string;
-    #streams: Partial<Record<LogLevel, Writable>>;
-    #formatter: LogFormatter;
+    readonly #context: string;
+    readonly #streams: Partial<Record<LogLevel, Writable>>;
+    readonly #formatter: LogFormatter;
 
     constructor(options: StreamLoggerOptions) {
         super();

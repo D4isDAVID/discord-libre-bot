@@ -26,10 +26,10 @@ export interface BotEventHandlerOptions {
 }
 
 export class BotEventHandler {
-    #logger: Logger;
-    #db: Repositories;
-    #client: BotClient;
-    #cache: BotCache;
+    readonly #logger: Logger;
+    readonly #db: Repositories;
+    readonly #client: BotClient;
+    readonly #cache: BotCache;
 
     #intents = 0;
 

@@ -40,26 +40,26 @@ export interface BotInteractionHandlerOptions {
 }
 
 export class BotInteractionHandler {
-    #logger: Logger;
-    #db: Repositories;
-    #client: BotClient;
-    #cache: BotCache;
+    readonly #logger: Logger;
+    readonly #db: Repositories;
+    readonly #client: BotClient;
+    readonly #cache: BotCache;
 
-    #commands = new Collection<
+    readonly #commands = new Collection<
         string,
         GenericBotInteraction<APIApplicationCommandInteraction>
     >();
-    #messageComponents = new Collection<
+    readonly #messageComponents = new Collection<
         string,
         GenericBotInteraction<APIMessageComponentInteraction>
     >();
-    #modals = new Collection<
+    readonly #modals = new Collection<
         string,
         GenericBotInteraction<APIModalSubmitInteraction>
     >();
 
-    #statefulMessageComponents: string[] = [];
-    #statefulModals: string[] = [];
+    readonly #statefulMessageComponents: string[] = [];
+    readonly #statefulModals: string[] = [];
 
     constructor({ logger, db, client, cache }: BotInteractionHandlerOptions) {
         this.#logger = logger;
@@ -157,10 +157,11 @@ export class BotInteractionHandler {
 
             collection.set(id, {
                 ...interaction,
-                handler: async (...args: Parameters<T['handler']>) => {
+                async handler(...args: Parameters<T['handler']>) {
                     logger.trace('interaction handled');
                     try {
-                        //@ts-ignore we're just wrapping the function, the parameters are the same
+                        //@ts-expect-error we're just wrapping the function, the parameters are the same
+                        // biome-ignore lint/performance/noAwaitInLoops: this code isn't running yet
                         await handler(...args);
                     } catch (err) {
                         logger.error(

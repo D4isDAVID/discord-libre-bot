@@ -21,13 +21,13 @@ import {
 import type { Require } from '@internal/util';
 
 export enum CombinedIntents {
-    MessageContent = GatewayIntentBits.GuildMessages |
-        GatewayIntentBits.DirectMessages |
-        GatewayIntentBits.MessageContent,
-    GuildMessagesContent = GatewayIntentBits.GuildMessages |
-        GatewayIntentBits.MessageContent,
-    DirectMessagesContent = GatewayIntentBits.DirectMessages |
-        GatewayIntentBits.MessageContent,
+    MessageContent = GatewayIntentBits.GuildMessages
+        | GatewayIntentBits.DirectMessages
+        | GatewayIntentBits.MessageContent,
+    GuildMessagesContent = GatewayIntentBits.GuildMessages
+        | GatewayIntentBits.MessageContent,
+    DirectMessagesContent = GatewayIntentBits.DirectMessages
+        | GatewayIntentBits.MessageContent,
 }
 
 export interface IntentBasedEventData {

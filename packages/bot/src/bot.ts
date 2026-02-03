@@ -17,11 +17,11 @@ export interface BotOptions {
 }
 
 export class Bot {
-    #logger: Logger;
-    client: BotClient;
+    readonly #logger: Logger;
+    readonly client: BotClient;
 
-    cache: BotCache;
-    features: BotFeatureHandler;
+    readonly cache: BotCache;
+    readonly features: BotFeatureHandler;
 
     constructor({ logger, db, client }: BotOptions) {
         this.#logger = logger;

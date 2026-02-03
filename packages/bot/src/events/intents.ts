@@ -76,23 +76,23 @@ export const gatewayDispatchEventIntents: Record<keyof MappedEvents, number> = {
         GatewayIntentBits.GuildMessages | GatewayIntentBits.DirectMessages,
     [GatewayDispatchEvents.MessageDeleteBulk]: GatewayIntentBits.GuildMessages,
     [GatewayDispatchEvents.MessagePollVoteAdd]:
-        GatewayIntentBits.GuildMessagePolls |
-        GatewayIntentBits.DirectMessagePolls,
+        GatewayIntentBits.GuildMessagePolls
+        | GatewayIntentBits.DirectMessagePolls,
     [GatewayDispatchEvents.MessagePollVoteRemove]:
-        GatewayIntentBits.GuildMessagePolls |
-        GatewayIntentBits.DirectMessagePolls,
+        GatewayIntentBits.GuildMessagePolls
+        | GatewayIntentBits.DirectMessagePolls,
     [GatewayDispatchEvents.MessageReactionAdd]:
-        GatewayIntentBits.GuildMessageReactions |
-        GatewayIntentBits.DirectMessageReactions,
+        GatewayIntentBits.GuildMessageReactions
+        | GatewayIntentBits.DirectMessageReactions,
     [GatewayDispatchEvents.MessageReactionRemove]:
-        GatewayIntentBits.GuildMessageReactions |
-        GatewayIntentBits.DirectMessageReactions,
+        GatewayIntentBits.GuildMessageReactions
+        | GatewayIntentBits.DirectMessageReactions,
     [GatewayDispatchEvents.MessageReactionRemoveAll]:
-        GatewayIntentBits.GuildMessageReactions |
-        GatewayIntentBits.DirectMessageReactions,
+        GatewayIntentBits.GuildMessageReactions
+        | GatewayIntentBits.DirectMessageReactions,
     [GatewayDispatchEvents.MessageReactionRemoveEmoji]:
-        GatewayIntentBits.GuildMessageReactions |
-        GatewayIntentBits.DirectMessageReactions,
+        GatewayIntentBits.GuildMessageReactions
+        | GatewayIntentBits.DirectMessageReactions,
     [GatewayDispatchEvents.MessageUpdate]:
         GatewayIntentBits.GuildMessages | GatewayIntentBits.DirectMessages,
     [GatewayDispatchEvents.PresenceUpdate]: GatewayIntentBits.GuildPresences,
@@ -113,8 +113,8 @@ export const gatewayDispatchEventIntents: Record<keyof MappedEvents, number> = {
     [GatewayDispatchEvents.ThreadMemberUpdate]: GatewayIntentBits.Guilds,
     [GatewayDispatchEvents.ThreadUpdate]: GatewayIntentBits.Guilds,
     [GatewayDispatchEvents.TypingStart]:
-        GatewayIntentBits.GuildMessageTyping |
-        GatewayIntentBits.DirectMessageTyping,
+        GatewayIntentBits.GuildMessageTyping
+        | GatewayIntentBits.DirectMessageTyping,
     [GatewayDispatchEvents.UserUpdate]: 0,
     // [GatewayDispatchEvents.VoiceChannelEffectSend]:
     //     GatewayIntentBits.GuildVoiceStates,

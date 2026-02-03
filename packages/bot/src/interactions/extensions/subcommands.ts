@@ -170,7 +170,7 @@ export function createSubcommandsCommand<
                 logger: data.logger,
             })({
                 ...props,
-                //@ts-ignore
+                //@ts-expect-error
                 option: data.subcommandOption,
             });
         },
@@ -203,7 +203,7 @@ export function createSubcommandsCommand<
                 logger: data.logger,
             })({
                 ...props,
-                //@ts-ignore
+                //@ts-expect-error
                 option: data.subcommandOption,
             });
         },
@@ -219,8 +219,8 @@ function getSubcommandGroupData<
 ) {
     const subcommandOption = options[0];
     if (
-        typeof subcommandOption === 'undefined' ||
-        subcommandOption.type !== ApplicationCommandOptionType.Subcommand
+        typeof subcommandOption === 'undefined'
+        || subcommandOption.type !== ApplicationCommandOptionType.Subcommand
     ) {
         logger.warn('missing subcommand');
         return;
@@ -248,10 +248,10 @@ function getSubcommandData<T extends APIChatInputApplicationCommandInteraction>(
 ) {
     const subcommandOption = options[0];
     if (
-        typeof subcommandOption === 'undefined' ||
-        (subcommandOption.type !== ApplicationCommandOptionType.Subcommand &&
-            subcommandOption.type !==
-                ApplicationCommandOptionType.SubcommandGroup)
+        typeof subcommandOption === 'undefined'
+        || (subcommandOption.type !== ApplicationCommandOptionType.Subcommand
+            && subcommandOption.type
+                !== ApplicationCommandOptionType.SubcommandGroup)
     ) {
         logger.warn('missing subcommand or subcommand group');
         return;

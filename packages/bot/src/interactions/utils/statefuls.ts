@@ -14,7 +14,7 @@ export const intSerializer: StatefulInteractionSerializer<number> = {
         return `${state}`;
     },
     deserialize(state) {
-        return Number.parseInt(state);
+        return Number.parseInt(state, 10);
     },
 };
 

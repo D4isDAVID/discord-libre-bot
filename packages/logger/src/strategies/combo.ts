@@ -5,7 +5,7 @@ export interface ComboLoggerOptions {
 }
 
 export class ComboLogger extends Logger {
-    #loggers: Set<Logger>;
+    readonly #loggers: Set<Logger>;
 
     constructor(options: ComboLoggerOptions) {
         super();

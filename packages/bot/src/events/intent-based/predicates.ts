@@ -6,6 +6,8 @@ import {
 import type { MapUnion } from '@internal/util';
 import type { IntentBasedEventData } from './types.ts';
 
+const NO_INTENTS = 0;
+
 interface IntentBasedPredicateData {
     userId: Snowflake;
 }
@@ -39,9 +41,9 @@ function guildsDmsPredicate<T extends keyof IntentBasedEventData>() {
 
 function messageContentPredicate<T extends keyof IntentBasedEventData>() {
     return {
-        [GatewayIntentBits.GuildMessages |
-            GatewayIntentBits.DirectMessages |
-            GatewayIntentBits.MessageContent]: () => true,
+        [GatewayIntentBits.GuildMessages
+            | GatewayIntentBits.DirectMessages
+            | GatewayIntentBits.MessageContent]: () => true,
         [GatewayIntentBits.GuildMessages]: (obj: object) => 'guild_id' in obj,
         [GatewayIntentBits.GuildMessages | GatewayIntentBits.MessageContent]: (
             obj: object,
@@ -69,7 +71,10 @@ export const intentBasedEventPredicates: {
     [GatewayDispatchEvents.GuildMemberUpdate]: {
         0: function (this, obj) {
             return obj.user.id === this.userId;
-        } as Predicate<GatewayDispatchEvents.GuildMemberUpdate, 0>,
+        } as Predicate<
+            GatewayDispatchEvents.GuildMemberUpdate,
+            typeof NO_INTENTS
+        >,
     },
     [GatewayDispatchEvents.MessageCreate]:
         messageContentPredicate<GatewayDispatchEvents.MessageCreate>(),

@@ -7,7 +7,7 @@ export interface BotCacheOptions {
 }
 
 export class BotCache {
-    #client: BotClient;
+    readonly #client: BotClient;
 
     #ping: number | undefined;
 

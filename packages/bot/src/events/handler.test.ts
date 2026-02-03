@@ -95,10 +95,10 @@ suite('BotEventHandler', () => {
 
             assert.equal(
                 handler.intents,
-                GatewayIntentBits.Guilds |
-                    GatewayIntentBits.GuildMessages |
-                    GatewayIntentBits.DirectMessages |
-                    GatewayIntentBits.MessageContent,
+                GatewayIntentBits.Guilds
+                    | GatewayIntentBits.GuildMessages
+                    | GatewayIntentBits.DirectMessages
+                    | GatewayIntentBits.MessageContent,
             );
         });
     });

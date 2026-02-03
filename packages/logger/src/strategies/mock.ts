@@ -1,7 +1,7 @@
 import { type LogData, Logger, type LogLevel } from '../base.ts';
 
 export class MockLogger extends Logger {
-    #log: ((level: LogLevel) => void) | null = null;
+    readonly #log: ((level: LogLevel) => void) | null = null;
 
     constructor(log: ((log: LogLevel) => void) | null = null) {
         super();
