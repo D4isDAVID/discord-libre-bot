@@ -117,7 +117,14 @@ export class BotInteractionHandler {
             );
 
         const commands: RESTPutAPIApplicationCommandsJSONBody =
-            this.#commands.map((command) => command.data);
+            this.#commands.map((command) => ({
+                integration_types: Object.keys(
+                    application.integration_types_config ?? {},
+                )
+                    .map((t) => Number.parseInt(t, 10))
+                    .filter((t) => typeof t !== 'undefined'),
+                ...command.data,
+            }));
 
         if (!haveCommandsChanged(commands, globalCommands)) {
             this.#logger.info("not deploying commands as they haven't changed");
