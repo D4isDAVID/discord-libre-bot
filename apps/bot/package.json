@@ -21,7 +21,7 @@
     "zlib-sync": "catalog:"
   },
   "devDependencies": {
-    "@internal/configs": "workspace:",
+    "@internal/config": "workspace:",
     "@rspack/core": "catalog:",
     "node-loader": "catalog:"
   }

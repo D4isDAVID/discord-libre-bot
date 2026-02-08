@@ -19,7 +19,7 @@
     "@internal/bot": "workspace:"
   },
   "devDependencies": {
-    "@internal/configs": "workspace:",
+    "@internal/config": "workspace:",
     "@internal/data": "workspace:"
   }
 }

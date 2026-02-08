@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@electric-sql/pglite": "catalog:",
-    "@internal/configs": "workspace:",
+    "@internal/config": "workspace:",
     "@internal/logger": "workspace:",
     "@types/pg": "catalog:",
     "drizzle-kit": "catalog:"

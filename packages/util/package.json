@@ -10,6 +10,6 @@
     "build": "tsc"
   },
   "devDependencies": {
-    "@internal/configs": "workspace:"
+    "@internal/config": "workspace:"
   }
 }

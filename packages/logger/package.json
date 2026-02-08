@@ -13,6 +13,6 @@
     "yoctocolors": "catalog:"
   },
   "devDependencies": {
-    "@internal/configs": "workspace:"
+    "@internal/config": "workspace:"
   }
 }

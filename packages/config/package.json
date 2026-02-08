@@ -1,11 +1,11 @@
 {
   "$schema": "https://www.schemastore.org/package.json",
-  "name": "@internal/configs",
+  "name": "@internal/config",
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
-    "./tsconfig.json": "./tsconfig.json"
+    "./rspack": "./rspack.config.ts",
+    "./tsconfig": "./tsconfig.base.json"
   },
   "scripts": {
     "clean": "rimraf .turbo node_modules"

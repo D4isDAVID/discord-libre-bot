@@ -1,4 +1,4 @@
-import { rspackConfig } from '@internal/configs';
+import { rspackConfig } from '@internal/config/rspack';
 import { IgnorePlugin } from '@rspack/core';
 
 // biome-ignore lint/style/noDefaultExport: rspack requires this
