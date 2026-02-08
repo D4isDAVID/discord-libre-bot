@@ -24,6 +24,8 @@
     "lib": ["ESNext"],
     "target": "esnext",
 
+    "incremental": true,
+
     "skipLibCheck": true
   }
 }
