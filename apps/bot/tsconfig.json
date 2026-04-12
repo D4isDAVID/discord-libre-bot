@@ -1,0 +1,4 @@
+{
+  "extends": "@internal/config/tsconfig",
+  "include": ["src", "rspack.config.ts"]
+}

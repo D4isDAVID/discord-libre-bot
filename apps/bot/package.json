@@ -1,0 +1,21 @@
+{
+  "$schema": "https://www.schemastore.org/package.json",
+  "private": true,
+  "name": "bot",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf .turbo tsconfig.tsbuildinfo",
+    "clean:full": "rimraf node_modules",
+    "build": "tsc",
+    "start": "tsx --env-file=.env src/index.ts",
+    "build:prod": "rimraf dist && rspack build",
+    "start:prod": "node ."
+  },
+  "devDependencies": {
+    "@internal/config": "workspace:",
+    "@rspack/cli": "catalog:",
+    "@rspack/core": "catalog:",
+    "@types/node": "catalog:"
+  }
+}

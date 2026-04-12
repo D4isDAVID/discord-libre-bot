@@ -2,9 +2,10 @@
   "$schema": "https://www.schemastore.org/package.json",
   "private": true,
   "name": "@internal/config",
+  "type": "module",
   "exports": {
-    "rspack": "./rspack.ts",
-    "tsconfig": "./tsconfig.base.json"
+    "./rspack": "./rspack.ts",
+    "./tsconfig": "./tsconfig.base.json"
   },
   "scripts": {
     "clean": "rimraf .turbo tsconfig.tsbuildinfo",
