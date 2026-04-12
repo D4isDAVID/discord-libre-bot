@@ -1,0 +1,20 @@
+{
+  "$schema": "https://www.schemastore.org/package.json",
+  "private": true,
+  "name": "@internal/config",
+  "exports": {
+    "rspack": "./rspack.ts",
+    "tsconfig": "./tsconfig.base.json"
+  },
+  "scripts": {
+    "clean": "rimraf .turbo tsconfig.tsbuildinfo",
+    "clean:full": "rimraf node_modules",
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "@rspack/core": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://www.schemastore.org/package.json",
+  "private": true,
+  "name": "discord-libre-bot",
+  "scripts": {
+    "check": "biome check",
+    "check:write": "biome check --write",
+    "check:ci": "biome ci",
+    "clean": "turbo run clean && rimraf .turbo",
+    "clean:full": "turbo run clean:full && rimraf .turbo node_modules",
+    "test": "turbo run test",
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "build:prod": "turbo run build:prod",
+    "start:prod": "turbo run start:prod"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "pnpm",
+      "onFail": "error"
+    }
+  },
+  "packageManager": "pnpm@10.33.0",
+  "dependencies": {
+    "@biomejs/biome": "catalog:",
+    "@rspack/cli": "catalog:",
+    "@rspack/core": "catalog:",
+    "@types/node": "catalog:",
+    "rimraf": "catalog:",
+    "tsx": "catalog:",
+    "turbo": "catalog:",
+    "typescript": "catalog:"
+  }
+}
