@@ -249,7 +249,7 @@
         "useParseIntRadix": "error",
         "useQwikClasslist": "error",
         "useQwikMethodUsage": "error",
-        "useQwikValidLexicalScope": "error",
+        "useQwikValidLexicalScope": "off",
         "useSingleJsDocAsterisk": "error",
         "useUniqueElementIds": "error",
         "useValidForDirection": "error",
@@ -260,7 +260,7 @@
         "noAccumulatingSpread": "error",
         "noAwaitInLoops": "error",
         "noBarrelFile": "error",
-        "noDelete": "error",
+        "noDelete": "off",
         "noDynamicNamespaceImportAccess": "error",
         "noImgElement": "error",
         "noNamespaceImport": "error",
@@ -349,8 +349,7 @@
               "TextEncoder": "Import from `node:util` instead.",
               "BroadcastChannel": "Import from `node:worker_threads` instead.",
               "MessageChannel": "Import from `node:worker_threads` instead.",
-              "MessagePort": "Import from `node:worker_threads` instead.",
-              "structuredClone": "Import from `node:worker_threads` instead."
+              "MessagePort": "Import from `node:worker_threads` instead."
             }
           }
         },

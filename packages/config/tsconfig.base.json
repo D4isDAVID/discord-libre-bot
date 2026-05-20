@@ -7,13 +7,13 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
-    "noPropertyAccessFromIndexSignature": true,
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
 
     "allowImportingTsExtensions": true,
     "module": "preserve",
+    "types": ["node"],
 
     "noEmit": true,
 

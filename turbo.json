@@ -9,12 +9,16 @@
       "dependsOn": ["clean"],
       "cache": false
     },
-    "test": {
-      "dependsOn": ["^test"]
-    },
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["*.tsbuildinfo"]
+    },
+    "test": {
+      "dependsOn": ["build", "^test"]
+    },
+    "db-migration": {
+      "dependsOn": ["build"],
+      "outputs": ["drizzle/**"]
     },
     "start": {
       "dependsOn": ["build"],

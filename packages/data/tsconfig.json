@@ -1,0 +1,7 @@
+{
+  "extends": "@internal/config/tsconfig",
+  "compilerOptions": {
+    "types": ["node", "pg"]
+  },
+  "include": ["src"]
+}

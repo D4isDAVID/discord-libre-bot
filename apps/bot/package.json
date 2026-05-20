@@ -8,14 +8,30 @@
     "clean": "rimraf .turbo tsconfig.tsbuildinfo",
     "clean:full": "rimraf node_modules",
     "build": "tsc",
-    "start": "tsx --env-file=.env src/index.ts",
+    "start": "tsx --env-file=.env src/index.ts | pino-pretty",
     "build:prod": "rimraf dist && rspack build",
     "start:prod": "node ."
+  },
+  "dependencies": {
+    "@discordjs/core": "catalog:",
+    "@discordjs/formatters": "catalog:",
+    "@discordjs/rest": "catalog:",
+    "@discordjs/ws": "catalog:",
+    "@internal/bot": "workspace:",
+    "@internal/common": "workspace:",
+    "@internal/data": "workspace:",
+    "bufferutil": "catalog:",
+    "pg": "catalog:",
+    "pg-native": "catalog:",
+    "pino": "catalog:",
+    "zlib-sync": "catalog:"
   },
   "devDependencies": {
     "@internal/config": "workspace:",
     "@rspack/cli": "catalog:",
     "@rspack/core": "catalog:",
-    "@types/node": "catalog:"
+    "@types/node": "catalog:",
+    "node-loader": "catalog:",
+    "pino-pretty": "catalog:"
   }
 }

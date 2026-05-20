@@ -1,0 +1,25 @@
+{
+  "$schema": "https://www.schemastore.org/package.json",
+  "private": true,
+  "name": "@internal/common",
+  "type": "module",
+  "exports": "./src/index.ts",
+  "scripts": {
+    "clean": "rimraf .turbo tsconfig.tsbuildinfo",
+    "clean:full": "rimraf node_modules",
+    "build": "tsc",
+    "test": "tsx --test"
+  },
+  "peerDependencies": {
+    "pino": "catalog:"
+  },
+  "peerDependenciesMeta": {
+    "pino": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@internal/config": "workspace:",
+    "@types/node": "catalog:"
+  }
+}

@@ -1,8 +1,11 @@
 import type { RspackOptions, SwcLoaderOptions } from '@rspack/core';
 
 const TS_FILE_REGEX = /\.ts$/;
+const NODE_FILE_REGEX = /\.node$/;
 
-export function rspackConfig(): RspackOptions {
+export function rspackConfig({
+    plugins = [],
+}: Pick<RspackOptions, 'plugins'> = {}): RspackOptions {
     return {
         devtool: false,
         module: {
@@ -18,13 +21,18 @@ export function rspackConfig(): RspackOptions {
                         },
                     } satisfies SwcLoaderOptions,
                 },
+                {
+                    test: NODE_FILE_REGEX,
+                    loader: 'node-loader',
+                },
             ],
         },
         output: {
             filename: 'index.js',
         },
+        plugins,
         resolve: {
-            extensions: ['.ts'],
+            extensions: ['.js', '.ts'],
         },
         target: ['node', 'es2025'],
     };

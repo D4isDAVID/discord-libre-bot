@@ -1,0 +1,38 @@
+{
+  "$schema": "https://www.schemastore.org/package.json",
+  "private": true,
+  "name": "@internal/data",
+  "type": "module",
+  "exports": "./src/index.ts",
+  "scripts": {
+    "clean": "rimraf .turbo tsconfig.tsbuildinfo",
+    "clean:full": "rimraf node_modules",
+    "build": "tsc",
+    "test": "tsx --test",
+    "db-migration": "drizzle-kit generate"
+  },
+  "peerDependencies": {
+    "drizzle-orm": "catalog:",
+    "pg": "catalog:",
+    "pg-native": "catalog:"
+  },
+  "peerDependenciesMeta": {
+    "drizzle-orm": {
+      "optional": true
+    },
+    "pg": {
+      "optional": true
+    },
+    "pg-native": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "catalog:",
+    "@internal/common": "workspace:",
+    "@internal/config": "workspace:",
+    "@types/node": "catalog:",
+    "@types/pg": "catalog:",
+    "drizzle-kit": "catalog:"
+  }
+}

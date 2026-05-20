@@ -9,8 +9,9 @@
     "check:ci": "biome ci",
     "clean": "turbo run clean && rimraf .turbo",
     "clean:full": "turbo run clean:full && rimraf .turbo node_modules",
-    "test": "turbo run test",
     "build": "turbo run build",
+    "test": "turbo run test",
+    "db-migration": "turbo run db-migration --",
     "start": "turbo run start",
     "build:prod": "turbo run build:prod",
     "start:prod": "turbo run start:prod"
